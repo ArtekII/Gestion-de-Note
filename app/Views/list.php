@@ -25,9 +25,15 @@
                 <?= esc($etudiant['nom']) ?>
               </a>
             </td>
-            <td><?= esc((string) $etudiant['id_semestre']) ?></td>
-            <td><?= esc((string) $etudiant['id_option']) ?></td>
-            <td><?= esc((string) $etudiant['id_matiere']) ?></td>
+            <td><?= esc($etudiant['semestre_nom'] ?? ('Semestre #' . $etudiant['id_semestre'])) ?></td>
+            <td><?= esc($etudiant['option_nom'] ?? ('Option #' . $etudiant['id_option'])) ?></td>
+            <td>
+              <?php if (! empty($etudiant['matiere_nom'])): ?>
+                <?= esc(($etudiant['code_matiere'] ?? '') . ' - ' . $etudiant['matiere_nom']) ?>
+              <?php else: ?>
+                <?= esc('Matiere #' . $etudiant['id_matiere']) ?>
+              <?php endif; ?>
+            </td>
             <td><?= esc((string) $etudiant['note']) ?></td>
             <td><?= esc((string) $etudiant['credit']) ?></td>
             <td><?= esc($etudiant['resultat']) ?></td>

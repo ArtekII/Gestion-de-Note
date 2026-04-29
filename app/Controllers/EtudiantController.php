@@ -14,8 +14,19 @@ class EtudiantController extends BaseController
 
     public function list(): string
     {
-        $etudiantModel = new Etudiant();
-        $etudiants = $etudiantModel->orderBy('id', 'DESC')->findAll();
+        $db = db_connect();
+        $etudiants = $db->table('etudiant e')
+            ->select(
+                'e.id, e.nom, e.id_semestre, e.id_option, e.id_matiere, e.note, e.credit, e.resultat, ' .
+                's.nom AS semestre_nom, o.nom AS option_nom, m.code_matiere, lm.Nom_matiere AS matiere_nom'
+            )
+            ->join('semestre s', 's.id = e.id_semestre', 'left')
+            ->join('options o', 'o.id = e.id_option', 'left')
+            ->join('matiere m', 'm.id = e.id_matiere', 'left')
+            ->join('liste_matiere lm', 'lm.code_matiere = m.code_matiere', 'left')
+            ->orderBy('e.id', 'DESC')
+            ->get()
+            ->getResultArray();
 
         return view('list', [
             'pageTitle' => 'Liste des etudiants',
@@ -36,26 +47,37 @@ class EtudiantController extends BaseController
 
         $nom = $etudiantRef['nom'];
         $selectedOption = $this->request->getGet('option');
+        $db = db_connect();
 
-        $options = $etudiantModel
-            ->select('id_option')
-            ->where('nom', $nom)
-            ->groupBy('id_option')
-            ->orderBy('id_option', 'ASC')
-            ->findAll();
+        $options = $db->table('etudiant e')
+            ->select('e.id_option, o.nom AS option_nom')
+            ->join('options o', 'o.id = e.id_option', 'left')
+            ->where('e.nom', $nom)
+            ->groupBy('e.id_option, o.nom')
+            ->orderBy('e.id_option', 'ASC')
+            ->get()
+            ->getResultArray();
 
-        $notesQuery = $etudiantModel
-            ->where('nom', $nom)
-            ->orderBy('id_semestre', 'ASC')
-            ->orderBy('id_matiere', 'ASC');
+        $notesQuery = $db->table('etudiant e')
+            ->select(
+                'e.id, e.id_semestre, e.id_option, e.id_matiere, e.note, e.credit, e.resultat, ' .
+                's.nom AS semestre_nom, o.nom AS option_nom, m.code_matiere, lm.Nom_matiere AS matiere_nom'
+            )
+            ->join('semestre s', 's.id = e.id_semestre', 'left')
+            ->join('options o', 'o.id = e.id_option', 'left')
+            ->join('matiere m', 'm.id = e.id_matiere', 'left')
+            ->join('liste_matiere lm', 'lm.code_matiere = m.code_matiere', 'left')
+            ->where('e.nom', $nom)
+            ->orderBy('e.id_semestre', 'ASC')
+            ->orderBy('e.id_matiere', 'ASC');
 
         if ($selectedOption !== null && $selectedOption !== '' && ctype_digit((string) $selectedOption)) {
-            $notesQuery->where('id_option', (int) $selectedOption);
+            $notesQuery->where('e.id_option', (int) $selectedOption);
         } else {
             $selectedOption = '';
         }
 
-        $notes = $notesQuery->findAll();
+        $notes = $notesQuery->get()->getResultArray();
         $moyenne = 0;
         if (! empty($notes)) {
             $total = array_sum(array_map(static fn ($note) => (float) $note['note'], $notes));

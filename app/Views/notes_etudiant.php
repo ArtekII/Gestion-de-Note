@@ -17,7 +17,7 @@
       <?php foreach ($options as $option) { ?>
         <?php $optionId = (string) $option['nom']; ?>
         <option value="<?= esc($optionId) ?>" <?= $selectedOption === $optionId ? 'selected' : '' ?>>
-          Option <?= esc($optionId) ?>
+          <?= esc($option['option_nom'] ?? ('Option #' . $optionId)) ?>
         </option>
       <?php } ?>
     </select>
@@ -41,9 +41,15 @@
         <?php foreach ($notes as $ligne){ ?>
           <tr>
             <td><?= esc((string) $ligne['id']) ?></td>
-            <td><?= esc((string) $ligne['id_semestre']) ?></td>
-            <td><?= esc((string) $ligne['id_option']) ?></td>
-            <td><?= esc((string) $ligne['id_matiere']) ?></td>
+            <td><?= esc($ligne['semestre_nom'] ?? ('Semestre #' . $ligne['id_semestre'])) ?></td>
+            <td><?= esc($ligne['option_nom'] ?? ('Option #' . $ligne['id_option'])) ?></td>
+            <td>
+              <?php if (! empty($ligne['matiere_nom'])) { ?>
+                <?= esc(($ligne['code_matiere'] ?? '') . ' - ' . $ligne['matiere_nom']) ?>
+              <?php } else { ?>
+                <?= esc('Matiere #' . $ligne['id_matiere']) ?>
+              <?php } ?>
+            </td>
             <td><?= esc((string) $ligne['note']) ?></td>
             <td><?= esc((string) $ligne['credit']) ?></td>
             <td><?= esc($ligne['resultat']) ?></td>
