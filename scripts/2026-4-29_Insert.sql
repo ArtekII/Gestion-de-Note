@@ -53,5 +53,12 @@ INSERT INTO etudiant (nom, id_option, id_semestre, id_matiere, note, credit, res
 ('Etudiant 1', 1, 2, 8, 12.2, 10, 'AB'),
 ('Etudiant 1', 1, 2, 9, 12, 6, 'AB'),
 ('Etudiant 1', 1, 2, 10, 11.33, 4, 'P'),
-('Etudiant 1', 1, 2, 11, 12.25, 4, 'AB');
+('Etudiant 1', 1, 2, 11, 12.25, 4, 'AB'),
 
+-- Etudiant 2: relevé S3 uniquement (tronc commun)
+('Etudiant 2', NULL, 1, 1, 10.5, 6, 'P'),
+('Etudiant 2', NULL, 1, 2, 14, 6, 'B'),
+('Etudiant 2', NULL, 1, 3, 11, 4, 'P'),
+('Etudiant 2', NULL, 1, 4, 10, 6, 'P'),
+('Etudiant 2', NULL, 1, 5, 6.5, 4, 'Comp.'),
+('Etudiant 2', NULL, 1, 6, 13, 4, 'AB');
