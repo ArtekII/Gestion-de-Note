@@ -25,18 +25,4 @@ class Home extends BaseController
         ]);
     }
 
-    public function list(): string
-    {
-        $etudiantModel = new Etudiant();
-        $etudiants = $etudiantModel->orderBy('id', 'DESC')->findAll();
-
-        return view('list', [
-            'pageTitle' => 'Liste des etudiants',
-            'topbarTitle' => 'Gestion des etudiants',
-            'activeMenu' => 'list',
-            'totalEtudiants' => count($etudiants),
-            'etudiants' => $etudiants,
-        ]);
-    }
-
 }
