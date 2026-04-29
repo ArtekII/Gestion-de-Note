@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ERROR - 2026-04-29 08:30:33 --> Error connecting to the database: mysqli_sql_exception: No such file or directory in /home/kenny/Documents/S4/SI/trinome/Gestion-de-Note/system/Database/MySQLi/Connection.php:201
 Stack trace:
 #0 /home/kenny/Documents/S4/SI/trinome/Gestion-de-Note/system/Database/MySQLi/Connection.php(201): mysqli->real_connect()
@@ -442,3 +443,185 @@ Stack trace:
 #12 /home/kenny/Documents/S4/SI/trinome/Gestion-de-Note/public/index.php(59): CodeIgniter\Boot::bootWeb()
 #13 /home/kenny/Documents/S4/SI/trinome/Gestion-de-Note/system/rewrite.php(44): require_once('...')
 #14 {main}
+=======
+CRITICAL - 2026-04-29 07:29:20 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "notes_etudiant.html"
+[Method: GET, Route: etudiants/1]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/Home.php(72): view()
+ 4 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\Home->notesEtudiant()
+ 5 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH/rewrite.php(44): require_once('/home/itu/Bureau/S4/SI/Gestion-de-Note/public/index.php')
+CRITICAL - 2026-04-29 07:29:37 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "notes_etudiant.html"
+[Method: GET, Route: etudiants/Etudiant%201]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/Home.php(72): view()
+ 4 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\Home->notesEtudiant()
+ 5 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH/rewrite.php(44): require_once('/home/itu/Bureau/S4/SI/Gestion-de-Note/public/index.php')
+CRITICAL - 2026-04-29 07:29:48 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "notes_etudiant.html"
+[Method: GET, Route: etudiants/Etudiant%201]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/Home.php(72): view()
+ 4 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\Home->notesEtudiant()
+ 5 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH/rewrite.php(44): require_once('/home/itu/Bureau/S4/SI/Gestion-de-Note/public/index.php')
+CRITICAL - 2026-04-29 07:34:04 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "dashboard.html"
+[Method: GET, Route: etudiants/1]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/View/View.php(256): CodeIgniter\View\View->render()
+ 3 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 4 APPPATH/Controllers/NotesController.php(40): view()
+ 5 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\NotesController->show()
+ 6 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 8 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+10 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+11 SYSTEMPATH/rewrite.php(44): require_once('/home/itu/Bureau/S4/SI/Gestion-de-Note/public/index.php')
+CRITICAL - 2026-04-29 07:35:39 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "dashboard.html"
+[Method: GET, Route: etudiants/1]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/View/View.php(256): CodeIgniter\View\View->render()
+ 3 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 4 APPPATH/Controllers/NotesController.php(40): view()
+ 5 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\NotesController->show()
+ 6 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 8 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+10 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+11 SYSTEMPATH/rewrite.php(44): require_once('/home/itu/Bureau/S4/SI/Gestion-de-Note/public/index.php')
+CRITICAL - 2026-04-29 07:38:00 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "dashboard.html"
+[Method: GET, Route: etudiants/1]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/View/View.php(256): CodeIgniter\View\View->render()
+ 3 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 4 APPPATH/Controllers/NotesController.php(40): view()
+ 5 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\NotesController->show()
+ 6 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 8 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+10 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+11 SYSTEMPATH/rewrite.php(44): require_once('/home/itu/Bureau/S4/SI/Gestion-de-Note/public/index.php')
+CRITICAL - 2026-04-29 07:39:05 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "dashboard.html"
+[Method: GET, Route: etudiants/Etudiant%201]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/View/View.php(256): CodeIgniter\View\View->render()
+ 3 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 4 APPPATH/Controllers/NotesController.php(40): view()
+ 5 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\NotesController->show()
+ 6 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 8 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+10 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+11 SYSTEMPATH/rewrite.php(44): require_once('/home/itu/Bureau/S4/SI/Gestion-de-Note/public/index.php')
+CRITICAL - 2026-04-29 07:40:38 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "dashboard.html"
+[Method: GET, Route: etudiants/1]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/View/View.php(256): CodeIgniter\View\View->render()
+ 3 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 4 APPPATH/Controllers/NotesController.php(46): view()
+ 5 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\NotesController->show()
+ 6 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 8 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+10 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+11 SYSTEMPATH/rewrite.php(44): require_once('/home/itu/Bureau/S4/SI/Gestion-de-Note/public/index.php')
+CRITICAL - 2026-04-29 07:40:39 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "dashboard.html"
+[Method: GET, Route: etudiants/1]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/View/View.php(256): CodeIgniter\View\View->render()
+ 3 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 4 APPPATH/Controllers/NotesController.php(46): view()
+ 5 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\NotesController->show()
+ 6 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 8 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+10 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+11 SYSTEMPATH/rewrite.php(44): require_once('/home/itu/Bureau/S4/SI/Gestion-de-Note/public/index.php')
+CRITICAL - 2026-04-29 07:40:41 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "dashboard.html"
+[Method: GET, Route: etudiants/1]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/View/View.php(256): CodeIgniter\View\View->render()
+ 3 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 4 APPPATH/Controllers/NotesController.php(46): view()
+ 5 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\NotesController->show()
+ 6 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 8 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+10 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+11 SYSTEMPATH/rewrite.php(44): require_once('/home/itu/Bureau/S4/SI/Gestion-de-Note/public/index.php')
+CRITICAL - 2026-04-29 07:58:36 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "index.php/list.php"
+[Method: GET, Route: /]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 39.
+ 1 SYSTEMPATH/View/View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/Home.php(12): view()
+ 4 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\Home->index()
+ 5 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH/rewrite.php(44): require_once('/home/lavi/Documents/ProjetMrRojoPlanAtrois/Gestion-de-Note/public/index.php')
+CRITICAL - 2026-04-29 09:06:40 --> ErrorException: Undefined array key "nom"
+[Method: GET, Route: etudiants/11]
+in APPPATH/Views/notes_etudiant.php on line 18.
+ 1 APPPATH/Views/notes_etudiant.php(18): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(240): include('/home/itu/Bureau/S4/SI/Gestion-de-Note/app/Views/notes_etudiant.php')
+ 3 SYSTEMPATH/View/View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/EtudiantController.php(87): view()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\EtudiantController->show()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/itu/Bureau/S4/SI/Gestion-de-Note/public/index.php')
+CRITICAL - 2026-04-29 09:06:42 --> ErrorException: Undefined array key "nom"
+[Method: GET, Route: etudiants/11]
+in APPPATH/Views/notes_etudiant.php on line 18.
+ 1 APPPATH/Views/notes_etudiant.php(18): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(240): include('/home/itu/Bureau/S4/SI/Gestion-de-Note/app/Views/notes_etudiant.php')
+ 3 SYSTEMPATH/View/View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1250): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/EtudiantController.php(87): view()
+ 6 SYSTEMPATH/CodeIgniter.php(951): App\Controllers\EtudiantController->show()
+ 7 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/itu/Bureau/S4/SI/Gestion-de-Note/public/index.php')
+>>>>>>> e7a993526fcf0f70d23c9b95016ef80b1eb5e44d

@@ -179,8 +179,11 @@ input[type="checkbox"] {
 .alert svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px; }
 .alert-info { background: rgba(37,99,235,.08); color: #1e40af; }
 .alert-info svg { stroke: #2563eb; fill: none; }
+<<<<<<< HEAD
 .alert-error { background: rgba(239,68,68,.12); color: #991b1b; border-left: 3px solid #ef4444; }
 .alert-success { background: rgba(34,197,94,.12); color: #166534; border-left: 3px solid #22c55e; }
+=======
+>>>>>>> e7a993526fcf0f70d23c9b95016ef80b1eb5e44d
 
 /* ─── Logo icon shared ───────────────────────────────────────────────────── */
 .logo-icon {

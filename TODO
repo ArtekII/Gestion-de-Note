@@ -1,0 +1,15 @@
+-Login(mode étudiant et prof)(30mi,)
+    * Design : 
+        -Création du formulaire (login.html)
+    * Integration : 
+        - Mettre les valeurs par défaut
+-Liste étudiants : (45 min)
+    * Design : Liste.html 
+    * Integration : Intégration getAllVenant de la base
+    * Base : 
+        -Création de la table étudiant (nom,id_option,id_semestre,id_matiere,note,credit,resultat)
+
+-Page des notes (1h20)
+    * Integration : Lorsqu'on clicke sur un étudiant on vois ces notes avec une option au choix
+    * Design : nememmerdepas.html
+    * base : matieres, options, semestres, liste_matiere

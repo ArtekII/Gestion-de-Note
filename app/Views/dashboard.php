@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<<<<<<< HEAD
   <title>SysInfo — Tableau de bord</title>
   <link rel="stylesheet" href="<?= base_url('style.css') ?>" />
 </head>
@@ -11,6 +12,13 @@
 <div class="app">
 
   <!-- ── Sidebar ──────────────────────────────────────────────────────────── -->
+=======
+  <title>SysInfo - <?= esc($pageTitle ?? 'Tableau de bord') ?></title>
+  <link rel="stylesheet" href="<?= base_url('style.css') ?>" />
+</head>
+<body>
+<div class="app">
+>>>>>>> e7a993526fcf0f70d23c9b95016ef80b1eb5e44d
   <aside class="sidebar">
     <div class="sidebar-brand">
       <div class="logo-icon">
@@ -24,6 +32,7 @@
 
     <div class="sidebar-section">Navigation</div>
 
+<<<<<<< HEAD
     <a href="dashboard.html" class="nav-item active">
       <svg viewBox="0 0 24 24"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
       Tableau de bord
@@ -92,10 +101,31 @@
         <button class="icon-btn">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
         </button>
+=======
+    <a href="<?= site_url('dashboard') ?>" class="nav-item <?= ($activeMenu ?? '') === 'dashboard' ? 'active' : '' ?>">
+      <svg viewBox="0 0 24 24"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+      Tableau de bord
+    </a>
+
+    <a href="<?= site_url('list') ?>" class="nav-item <?= ($activeMenu ?? '') === 'list' ? 'active' : '' ?>">
+      <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      Liste etudiants
+      <span class="nav-badge"><?= esc((string) ($totalEtudiants ?? 0)) ?></span>
+    </a>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title"><?= esc($topbarTitle ?? ($pageTitle ?? 'Tableau de bord')) ?></div>
+      <div class="topbar-search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="Rechercher..." />
+>>>>>>> e7a993526fcf0f70d23c9b95016ef80b1eb5e44d
       </div>
     </div>
 
     <div class="content">
+<<<<<<< HEAD
 
       <div class="page-header">
         <div>
@@ -302,5 +332,18 @@
   </div><!-- /main -->
 </div><!-- /app -->
 
+=======
+      <div class="page-header">
+        <div>
+          <h2><?= esc($pageTitle ?? 'Tableau de bord') ?></h2>
+          <div class="breadcrumb">Accueil / <span><?= esc($pageTitle ?? 'Tableau de bord') ?></span></div>
+        </div>
+      </div>
+
+      <?= $this->renderSection('content') ?>
+    </div>
+  </div>
+</div>
+>>>>>>> e7a993526fcf0f70d23c9b95016ef80b1eb5e44d
 </body>
 </html>
