@@ -1,4 +1,4 @@
-<?= $this->extend('dashboard.html') ?>
+<?= $this->extend('dashboard.php') ?>
 
 <?= $this->section('content') ?>
 <div class="table-card">
@@ -21,7 +21,7 @@
           <tr>
             <td><?= esc((string) $etudiant['id']) ?></td>
             <td>
-              <a href="<?= site_url('etudiants/' . rawurlencode($etudiant['nom'])) ?>">
+              <a href="<?= site_url('etudiants/' . $etudiant['id']) ?>">
                 <?= esc($etudiant['nom']) ?>
               </a>
             </td>

@@ -8,10 +8,10 @@ create table options(
     nom VARCHAR(50) NOT NULL,
     responsable VARCHAR(50) NOT NULL
 );
-
 create table liste_matiere(
     id INT PRIMARY KEY AUTO_INCREMENT,
-    code_matiere VARCHAR(20) NOT NULL,
+
+    code_matiere VARCHAR(20) NOT NULL UNIQUE,
     Nom_matiere VARCHAR(50) NOT NULL
 );
 

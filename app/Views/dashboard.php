@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SysInfo — <?= esc($pageTitle ?? 'Tableau de bord') ?></title>
+  <title>SysInfo - <?= esc($pageTitle ?? 'Tableau de bord') ?></title>
   <link rel="stylesheet" href="<?= base_url('style.css') ?>" />
 </head>
 <body>
-
 <div class="app">
   <aside class="sidebar">
     <div class="sidebar-brand">
@@ -55,6 +54,5 @@
     </div>
   </div>
 </div>
-
 </body>
 </html>
