@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class Matiere extends Model
 {
-    protected $table            = 'matieres';
+    protected $table            = 'matiere';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';

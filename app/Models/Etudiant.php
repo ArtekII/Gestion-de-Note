@@ -40,10 +40,10 @@ class Etudiant extends Model
         "nom" => "required|at_least[3]",
         "id_matiere" => "required|integer",
         "id_semestre" => "required|integer",
-        "id_option" => "required|integer",
+        "id_option" => "permit_empty|integer",
         "note" => "required|numeric|less_than_equal_to[20]",
         "credit" => "required|integer|greater_than[0]",
-        "resultat" => "required|in_list[B,AB,P,Aj]"
+        "resultat" => "required|in_list[B,AB,P,Aj,Comp.]"
     ];
     protected $validationMessages   = [
         "nom" => [

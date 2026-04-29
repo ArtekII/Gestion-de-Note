@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class Semestre extends Model
 {
-    protected $table            = 'semestres';
+    protected $table            = 'semestre';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';

@@ -7,12 +7,10 @@
       <tr>
         <th>ID</th>
         <th>Nom</th>
-        <th>Semestre</th>
-        <th>Option</th>
-        <th>Matiere</th>
-        <th>Note</th>
-        <th>Credit</th>
-        <th>Resultat</th>
+        <th>Semestres</th>
+        <th>Options</th>
+        <th>Nb notes</th>
+        <th>Moyenne</th>
       </tr>
     </thead>
     <tbody>
@@ -25,23 +23,15 @@
                 <?= esc($etudiant['nom']) ?>
               </a>
             </td>
-            <td><?= esc($etudiant['semestre_nom'] ?? ('Semestre #' . $etudiant['id_semestre'])) ?></td>
-            <td><?= esc($etudiant['option_nom'] ?? ('Option #' . $etudiant['id_option'])) ?></td>
-            <td>
-              <?php if (! empty($etudiant['matiere_nom'])): ?>
-                <?= esc(($etudiant['code_matiere'] ?? '') . ' - ' . $etudiant['matiere_nom']) ?>
-              <?php else: ?>
-                <?= esc('Matiere #' . $etudiant['id_matiere']) ?>
-              <?php endif; ?>
-            </td>
-            <td><?= esc((string) $etudiant['note']) ?></td>
-            <td><?= esc((string) $etudiant['credit']) ?></td>
-            <td><?= esc($etudiant['resultat']) ?></td>
+            <td><?= esc($etudiant['semestres'] ?? '-') ?></td>
+            <td><?= esc($etudiant['options'] ?? '-') ?></td>
+            <td><?= esc((string) ($etudiant['nb_notes'] ?? 0)) ?></td>
+            <td><?= esc((string) ($etudiant['moyenne_brute'] ?? 0)) ?>/20</td>
           </tr>
         <?php endforeach; ?>
       <?php else: ?>
         <tr>
-          <td colspan="8" style="text-align:center;color:var(--c-muted)">Aucun etudiant trouve.</td>
+          <td colspan="6" style="text-align:center;color:var(--c-muted)">Aucun etudiant trouve.</td>
         </tr>
       <?php endif; ?>
     </tbody>

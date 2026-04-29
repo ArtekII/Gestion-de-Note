@@ -11,13 +11,33 @@
   </div>
 
   <form method="get" style="margin-top:14px;display:flex;align-items:center;gap:10px;">
+    <label for="annee">Annee:</label>
+    <select id="annee" name="annee" class="filter-select" onchange="this.form.submit()">
+      <option value="" <?= ($selectedAnnee ?? '') === '' ? 'selected' : '' ?>>Toutes les annees</option>
+      <?php foreach (($annees ?? []) as $annee) { ?>
+        <option value="<?= esc($annee['value']) ?>" <?= ($selectedAnnee ?? '') === $annee['value'] ? 'selected' : '' ?>>
+          <?= esc($annee['label']) ?>
+        </option>
+      <?php } ?>
+    </select>
+
+    <label for="semestre">Semestre:</label>
+    <select id="semestre" name="semestre" class="filter-select" onchange="this.form.submit()">
+      <option value="" <?= ($selectedSemestre ?? '') === '' ? 'selected' : '' ?>>Tous les semestres</option>
+      <?php foreach (($semestres ?? []) as $semestre) { ?>
+        <option value="<?= esc($semestre['value']) ?>" <?= ($selectedSemestre ?? '') === $semestre['value'] ? 'selected' : '' ?>>
+          <?= esc($semestre['label']) ?>
+        </option>
+      <?php } ?>
+    </select>
+
     <label for="option">Option:</label>
     <select id="option" name="option" class="filter-select" onchange="this.form.submit()">
       <option value="" <?= $selectedOption === '' ? 'selected' : '' ?>>Toutes les options</option>
-      <?php foreach ($options as $option) { ?>
-        <?php $optionId = (string) $option['nom']; ?>
-        <option value="<?= esc($optionId) ?>" <?= $selectedOption === $optionId ? 'selected' : '' ?>>
-          <?= esc($option['option_nom'] ?? ('Option #' . $optionId)) ?>
+      <?php foreach (($options ?? []) as $option) { ?>
+        <?php $optionValue = (string) $option['value']; ?>
+        <option value="<?= esc($optionValue) ?>" <?= $selectedOption === $optionValue ? 'selected' : '' ?>>
+          <?= esc($option['label']) ?>
         </option>
       <?php } ?>
     </select>
