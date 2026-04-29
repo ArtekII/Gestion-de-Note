@@ -15,7 +15,7 @@
     <select id="option" name="option" class="filter-select" onchange="this.form.submit()">
       <option value="" <?= $selectedOption === '' ? 'selected' : '' ?>>Toutes les options</option>
       <?php foreach ($options as $option) { ?>
-        <?php $optionId = (string) $option['id_option']; ?>
+        <?php $optionId = (string) $option['nom']; ?>
         <option value="<?= esc($optionId) ?>" <?= $selectedOption === $optionId ? 'selected' : '' ?>>
           Option <?= esc($optionId) ?>
         </option>

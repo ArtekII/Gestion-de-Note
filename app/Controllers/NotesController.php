@@ -4,13 +4,15 @@ namespace App\Controllers;
 
 use App\Models\Etudiant;
 use CodeIgniter\Exceptions\PageNotFoundException;
-
+use App\Models\Option;
 class NotesController extends BaseController
 {
     public function show(int $id): string
     {
         $etudiantModel = new Etudiant();
         $etudiantRef = $etudiantModel->find($id);
+        $options = new Option();
+        $allOptions = $options->findAll();
         if ($etudiantRef === null) {
             throw PageNotFoundException::forPageNotFound('Etudiant introuvable.');
         }
@@ -49,10 +51,10 @@ class NotesController extends BaseController
             'activeMenu' => 'list',
             'nomEtudiant' => $nom,
             'totalEtudiants' => (new Etudiant())->countAllResults(),
-            'options' => $options,
             'selectedOption' => (string) $selectedOption,
             'notes' => $notes,
             'moyenne' => $moyenne,
+            'options' => $allOptions,
         ]);
     }
 }
