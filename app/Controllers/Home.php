@@ -8,7 +8,8 @@ class Home extends BaseController
 {
     public function index()
     {
-        return redirect()->to(site_url('dashboard'));
+        // return redirect()->to(site_url('dashboard'));
+        return redirect()->to(site_url('list'));
     }
 
     public function dashboard(): string
