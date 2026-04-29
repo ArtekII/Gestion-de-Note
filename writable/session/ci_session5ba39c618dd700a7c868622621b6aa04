@@ -1,0 +1,2 @@
+__ci_last_regenerate|i:1777450247;error|s:107:"Erreur de connexion: Unable to connect to the database.
+Main connection [MySQLi]: No such file or directory";__ci_vars|a:2:{s:5:"error";s:3:"new";s:13:"_ci_old_input";s:3:"new";}_ci_old_input|a:2:{s:3:"get";a:0:{}s:4:"post";a:3:{s:14:"csrf_test_name";s:32:"c733ea5e87b7301f2c92237674a9837c";s:5:"email";s:15:"admin@gmail.com";s:8:"password";s:8:"admin123";}}

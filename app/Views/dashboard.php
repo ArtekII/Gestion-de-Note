@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SysInfo — Tableau de bord</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="<?= base_url('style.css') ?>" />
 </head>
 <body>
 
@@ -65,7 +65,7 @@
     </a>
 
     <div class="sidebar-bottom">
-      <a href="login.html" class="user-row">
+      <a href="<?= base_url('dashboard/logout') ?>" class="user-row">
         <div class="avatar">AD</div>
         <div class="user-info">
           <div class="name">Admin Sys</div>
