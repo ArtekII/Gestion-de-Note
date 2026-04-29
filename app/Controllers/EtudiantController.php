@@ -7,8 +7,12 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 
 class EtudiantController extends BaseController
 {
-    private const OPTIONAL_SUBJECT_GROUPS = [
-        ['MTH203', 'MTH206'],
+    private const OPTIONAL_SUBJECT_GROUPS_FALLBACK = [
+        [
+            'id_semestre' => 2,
+            'id_option' => null,
+            'codes' => ['MTH203', 'MTH206'],
+        ],
     ];
 
     public function index(): string
@@ -128,6 +132,255 @@ class EtudiantController extends BaseController
         ]);
     }
 
+    public function createNoteForm(): string
+    {
+        $db = db_connect();
+
+        $semestres = $db->table('semestre')
+            ->select('id, nom, annee')
+            ->orderBy('id', 'ASC')
+            ->get()
+            ->getResultArray();
+
+        $options = $db->table('options')
+            ->select('id, nom')
+            ->orderBy('id', 'ASC')
+            ->get()
+            ->getResultArray();
+
+        $matieres = $db->table('matiere m')
+            ->select('m.id, m.id_semestre, m.id_option, m.code_matiere, m.coefficient, lm.Nom_matiere AS matiere_nom, s.nom AS semestre_nom, o.nom AS option_nom')
+            ->join('liste_matiere lm', 'lm.code_matiere = m.code_matiere', 'left')
+            ->join('semestre s', 's.id = m.id_semestre', 'left')
+            ->join('options o', 'o.id = m.id_option', 'left')
+            ->orderBy('m.id', 'ASC')
+            ->get()
+            ->getResultArray();
+
+        return view('form', [
+            'pageTitle' => 'Ajouter des notes',
+            'topbarTitle' => 'Saisie des notes',
+            'activeMenu' => 'note_form',
+            'totalEtudiants' => (new Etudiant())->countAllResults(),
+            'semestres' => $semestres,
+            'options' => $options,
+            'matieres' => $matieres,
+        ]);
+    }
+
+    public function storeNotes()
+    {
+        $rows = $this->request->getPost('rows');
+        if (! is_array($rows) || $rows === []) {
+            return redirect()->back()->with('error', 'Aucune ligne de note à enregistrer.');
+        }
+
+        $db = db_connect();
+        $matieres = $db->table('matiere')->select('id, coefficient')->get()->getResultArray();
+        $coeffByMatiere = [];
+        foreach ($matieres as $matiere) {
+            $coeffByMatiere[(int) $matiere['id']] = (int) $matiere['coefficient'];
+        }
+
+        $toInsert = [];
+        foreach ($rows as $row) {
+            $nom = trim((string) ($row['nom'] ?? ''));
+            $idSemestre = (string) ($row['id_semestre'] ?? '');
+            $idOption = (string) ($row['id_option'] ?? '');
+            $idMatiere = (string) ($row['id_matiere'] ?? '');
+            $note = (string) ($row['note'] ?? '');
+            $credit = (string) ($row['credit'] ?? '');
+            $resultat = trim((string) ($row['resultat'] ?? ''));
+
+            // Skip empty rows created by UI.
+            if ($nom === '' && $idMatiere === '' && $note === '') {
+                continue;
+            }
+
+            if ($nom === '' || ! ctype_digit($idSemestre) || ! ctype_digit($idMatiere) || $note === '' || $resultat === '') {
+                return redirect()->back()->withInput()->with('error', 'Une ou plusieurs lignes sont incomplètes.');
+            }
+
+            if (! is_numeric($note)) {
+                return redirect()->back()->withInput()->with('error', 'La note doit être numérique.');
+            }
+
+            $noteFloat = (float) $note;
+            if ($noteFloat < 0 || $noteFloat > 20) {
+                return redirect()->back()->withInput()->with('error', 'La note doit être entre 0 et 20.');
+            }
+
+            $idMatiereInt = (int) $idMatiere;
+            $creditInt = ctype_digit($credit) ? (int) $credit : ($coeffByMatiere[$idMatiereInt] ?? 0);
+            if ($creditInt <= 0) {
+                return redirect()->back()->withInput()->with('error', 'Crédit invalide.');
+            }
+
+            $toInsert[] = [
+                'nom' => $nom,
+                'id_semestre' => (int) $idSemestre,
+                'id_option' => ctype_digit($idOption) ? (int) $idOption : null,
+                'id_matiere' => $idMatiereInt,
+                'note' => $noteFloat,
+                'credit' => $creditInt,
+                'resultat' => $resultat,
+            ];
+        }
+
+        if ($toInsert === []) {
+            return redirect()->back()->withInput()->with('error', 'Aucune ligne valide à enregistrer.');
+        }
+
+        $model = new Etudiant();
+        if (! $model->insertBatch($toInsert)) {
+            $error = implode(' | ', $model->errors() ?? []);
+            return redirect()->back()->withInput()->with('error', $error !== '' ? $error : 'Erreur lors de l\'enregistrement.');
+        }
+
+        return redirect()->to(site_url('list'))->with('success', count($toInsert) . ' note(s) ajoutée(s).');
+    }
+
+    public function editNoteForm(int $id): string
+    {
+        $db = db_connect();
+        $note = $db->table('etudiant')->where('id', $id)->get()->getRowArray();
+        if ($note === null) {
+            throw PageNotFoundException::forPageNotFound('Note introuvable.');
+        }
+
+        $semestres = $db->table('semestre')
+            ->select('id, nom, annee')
+            ->orderBy('id', 'ASC')
+            ->get()
+            ->getResultArray();
+
+        $options = $db->table('options')
+            ->select('id, nom')
+            ->orderBy('id', 'ASC')
+            ->get()
+            ->getResultArray();
+
+        $matieres = $db->table('matiere m')
+            ->select('m.id, m.id_semestre, m.id_option, m.code_matiere, m.coefficient, lm.Nom_matiere AS matiere_nom, s.nom AS semestre_nom, o.nom AS option_nom')
+            ->join('liste_matiere lm', 'lm.code_matiere = m.code_matiere', 'left')
+            ->join('semestre s', 's.id = m.id_semestre', 'left')
+            ->join('options o', 'o.id = m.id_option', 'left')
+            ->orderBy('m.id', 'ASC')
+            ->get()
+            ->getResultArray();
+
+        $returnQuery = (string) ($this->request->getGet('return_query') ?? '');
+
+        return view('note_edit', [
+            'pageTitle' => 'Modifier une note',
+            'topbarTitle' => 'Edition de note',
+            'activeMenu' => 'note_form',
+            'totalEtudiants' => (new Etudiant())->countAllResults(),
+            'note' => $note,
+            'semestres' => $semestres,
+            'options' => $options,
+            'matieres' => $matieres,
+            'returnQuery' => $returnQuery,
+            'studentRefId' => $this->resolveStudentReferenceId((string) ($note['nom'] ?? '')) ?? (int) ($note['id'] ?? 0),
+        ]);
+    }
+
+    public function updateNote(int $id)
+    {
+        $db = db_connect();
+        $existing = $db->table('etudiant')->where('id', $id)->get()->getRowArray();
+        if ($existing === null) {
+            throw PageNotFoundException::forPageNotFound('Note introuvable.');
+        }
+
+        $nom = trim((string) $this->request->getPost('nom'));
+        $idSemestre = (string) $this->request->getPost('id_semestre');
+        $idOption = (string) $this->request->getPost('id_option');
+        $idMatiere = (string) $this->request->getPost('id_matiere');
+        $note = (string) $this->request->getPost('note');
+        $credit = (string) $this->request->getPost('credit');
+        $resultat = trim((string) $this->request->getPost('resultat'));
+        $returnQuery = (string) $this->request->getPost('return_query');
+
+        if ($nom === '' || ! ctype_digit($idSemestre) || ! ctype_digit($idMatiere) || $note === '' || $resultat === '') {
+            return redirect()->back()->withInput()->with('error', 'Tous les champs obligatoires doivent etre remplis.');
+        }
+
+        if (! is_numeric($note)) {
+            return redirect()->back()->withInput()->with('error', 'La note doit etre numerique.');
+        }
+
+        $noteFloat = (float) $note;
+        if ($noteFloat < 0 || $noteFloat > 20) {
+            return redirect()->back()->withInput()->with('error', 'La note doit etre entre 0 et 20.');
+        }
+
+        $creditInt = ctype_digit($credit) ? (int) $credit : 0;
+        if ($creditInt <= 0) {
+            return redirect()->back()->withInput()->with('error', 'Le credit doit etre superieur a 0.');
+        }
+
+        $payload = [
+            'nom' => $nom,
+            'id_semestre' => (int) $idSemestre,
+            'id_option' => ctype_digit($idOption) ? (int) $idOption : null,
+            'id_matiere' => (int) $idMatiere,
+            'note' => $noteFloat,
+            'credit' => $creditInt,
+            'resultat' => $resultat,
+        ];
+
+        $model = new Etudiant();
+        if (! $model->update($id, $payload)) {
+            $error = implode(' | ', $model->errors() ?? []);
+            return redirect()->back()->withInput()->with('error', $error !== '' ? $error : 'Erreur pendant la modification.');
+        }
+
+        $studentRefId = $this->resolveStudentReferenceId($nom) ?? (int) $id;
+
+        return redirect()->to($this->buildStudentNotesUrl($studentRefId, $returnQuery))
+            ->with('success', 'Note modifiee avec succes.');
+    }
+
+    public function deleteNote(int $id)
+    {
+        $db = db_connect();
+        $note = $db->table('etudiant')->where('id', $id)->get()->getRowArray();
+        if ($note === null) {
+            throw PageNotFoundException::forPageNotFound('Note introuvable.');
+        }
+
+        $returnQuery = (string) $this->request->getPost('return_query');
+        $model = new Etudiant();
+        $nom = (string) ($note['nom'] ?? '');
+        $model->delete($id);
+
+        $studentRefId = $this->resolveStudentReferenceId($nom, $id);
+        if ($studentRefId === null) {
+            return redirect()->to(site_url('list'))->with('success', 'Note supprimee. Aucun enregistrement restant pour cet etudiant.');
+        }
+
+        return redirect()->to($this->buildStudentNotesUrl($studentRefId, $returnQuery))->with('success', 'Note supprimee.');
+    }
+
+    public function resetStudentNotes(int $id)
+    {
+        $db = db_connect();
+        $etudiantRef = $db->table('etudiant')->where('id', $id)->get()->getRowArray();
+        if ($etudiantRef === null) {
+            throw PageNotFoundException::forPageNotFound('Etudiant introuvable.');
+        }
+
+        $nom = (string) ($etudiantRef['nom'] ?? '');
+        if ($nom === '') {
+            throw PageNotFoundException::forPageNotFound('Etudiant introuvable.');
+        }
+
+        $db->table('etudiant')->where('nom', $nom)->delete();
+
+        return redirect()->to(site_url('list'))->with('success', 'Toutes les notes de ' . $nom . ' ont ete reinitialisees.');
+    }
+
     private function extractSemestres(array $notes): array
     {
         $out = [];
@@ -218,13 +471,22 @@ class EtudiantController extends BaseController
         $filtered = array_values($bestBySubject);
 
         // Regle 2: pour les matieres optionnelles, garder la meilleure note du groupe.
-        foreach (self::OPTIONAL_SUBJECT_GROUPS as $group) {
+        $optionalGroups = $this->loadOptionalSubjectGroups();
+        foreach ($optionalGroups as $group) {
             $bestIndex = null;
             $bestNote = -INF;
 
             foreach ($filtered as $i => $note) {
                 $code = (string) ($note['code_matiere'] ?? '');
-                if (in_array($code, $group, true) && (float) $note['note'] > $bestNote) {
+                if (! in_array($code, $group['codes'], true)) {
+                    continue;
+                }
+
+                if (! $this->noteMatchesGroupScope($note, $group)) {
+                    continue;
+                }
+
+                if ((float) $note['note'] > $bestNote) {
                     $bestNote = (float) $note['note'];
                     $bestIndex = $i;
                 }
@@ -236,12 +498,112 @@ class EtudiantController extends BaseController
 
             foreach ($filtered as $i => $note) {
                 $code = (string) ($note['code_matiere'] ?? '');
-                if ($i !== $bestIndex && in_array($code, $group, true)) {
+                if ($i === $bestIndex) {
+                    continue;
+                }
+                if (! in_array($code, $group['codes'], true)) {
+                    continue;
+                }
+                if (! $this->noteMatchesGroupScope($note, $group)) {
+                    continue;
+                }
+                if ($i !== $bestIndex) {
                     unset($filtered[$i]);
                 }
             }
         }
 
         return array_values($filtered);
+    }
+
+    private function loadOptionalSubjectGroups(): array
+    {
+        $db = db_connect();
+        if (! $db->tableExists('groupe_optionnel') || ! $db->tableExists('groupe_optionnel_matiere')) {
+            return self::OPTIONAL_SUBJECT_GROUPS_FALLBACK;
+        }
+
+        $rows = $db->table('groupe_optionnel g')
+            ->select('g.id, g.id_semestre, g.id_option, gm.code_matiere')
+            ->join('groupe_optionnel_matiere gm', 'gm.id_groupe_optionnel = g.id')
+            ->orderBy('g.id', 'ASC')
+            ->get()
+            ->getResultArray();
+
+        if ($rows === []) {
+            return self::OPTIONAL_SUBJECT_GROUPS_FALLBACK;
+        }
+
+        $groups = [];
+        foreach ($rows as $row) {
+            $groupId = (int) $row['id'];
+            if (! isset($groups[$groupId])) {
+                $groups[$groupId] = [
+                    'id_semestre' => $row['id_semestre'] !== null ? (int) $row['id_semestre'] : null,
+                    'id_option' => $row['id_option'] !== null ? (int) $row['id_option'] : null,
+                    'codes' => [],
+                ];
+            }
+
+            $code = trim((string) ($row['code_matiere'] ?? ''));
+            if ($code !== '') {
+                $groups[$groupId]['codes'][] = $code;
+            }
+        }
+
+        foreach ($groups as $groupId => $group) {
+            $groups[$groupId]['codes'] = array_values(array_unique($group['codes']));
+        }
+
+        return array_values(array_filter($groups, static function (array $group): bool {
+            return ! empty($group['codes']);
+        }));
+    }
+
+    private function noteMatchesGroupScope(array $note, array $group): bool
+    {
+        $noteSemestre = isset($note['id_semestre']) ? (int) $note['id_semestre'] : null;
+        $noteOption = $note['id_option'] !== null ? (int) $note['id_option'] : null;
+
+        if ($group['id_semestre'] !== null && $noteSemestre !== (int) $group['id_semestre']) {
+            return false;
+        }
+
+        if ($group['id_option'] !== null && $noteOption !== (int) $group['id_option']) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private function buildStudentNotesUrl(int $studentId, string $returnQuery): string
+    {
+        $base = site_url('etudiants/' . $studentId);
+        $query = ltrim($returnQuery, '?');
+        if ($query === '') {
+            return $base;
+        }
+
+        return $base . '?' . $query;
+    }
+
+    private function resolveStudentReferenceId(string $nom, ?int $excludeId = null): ?int
+    {
+        $nom = trim($nom);
+        if ($nom === '') {
+            return null;
+        }
+
+        $builder = db_connect()->table('etudiant')->select('MIN(id) AS id')->where('nom', $nom);
+        if ($excludeId !== null) {
+            $builder->where('id !=', $excludeId);
+        }
+
+        $row = $builder->get()->getRowArray();
+        if (! isset($row['id']) || $row['id'] === null) {
+            return null;
+        }
+
+        return (int) $row['id'];
     }
 }

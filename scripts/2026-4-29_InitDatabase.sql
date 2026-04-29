@@ -28,6 +28,23 @@ create table matiere(
     FOREIGN KEY (code_matiere) REFERENCES liste_matiere(code_matiere)
 );
 
+create table groupe_optionnel(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nom VARCHAR(100) NOT NULL,
+    id_semestre INT NULL,
+    id_option INT NULL,
+    FOREIGN KEY (id_semestre) REFERENCES semestre(id),
+    FOREIGN KEY (id_option) REFERENCES options(id)
+);
+
+create table groupe_optionnel_matiere(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_groupe_optionnel INT NOT NULL,
+    code_matiere VARCHAR(20) NOT NULL,
+    FOREIGN KEY (id_groupe_optionnel) REFERENCES groupe_optionnel(id) ON DELETE CASCADE,
+    FOREIGN KEY (code_matiere) REFERENCES liste_matiere(code_matiere)
+);
+
 create table etudiant(
     id INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(50) NOT NULL,

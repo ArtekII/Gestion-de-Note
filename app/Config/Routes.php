@@ -5,20 +5,22 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-<<<<<<< HEAD
 $routes->get('/', 'Auth::login');
-$routes->get('/auth/login', 'Auth::login');
-$routes->post('/auth/login-process', 'Auth::loginProcess');
-$routes->get('/auth/register', 'Auth::register');
-$routes->post('/auth/register-process', 'Auth::registerProcess');
-$routes->get('/auth/logout', 'Auth::logout');
+$routes->get('auth/login', 'Auth::login');
+$routes->post('auth/login-process', 'Auth::loginProcess');
 
-$routes->get('/dashboard', 'Dashboard::index');
-$routes->get('/dashboard/logout', 'Dashboard::logout');
-=======
-$routes->get('/', 'Home::index');
-$routes->get('dashboard', 'Home::dashboard');
-$routes->get('etudiants','EtudiantController::index');
-$routes->get('list', 'EtudiantController::list');
-$routes->get('etudiants/(:num)', 'EtudiantController::show/$1');
->>>>>>> e7a993526fcf0f70d23c9b95016ef80b1eb5e44d
+$routes->group('', ['filter' => 'auth'], static function ($routes) {
+    $routes->get('auth/logout', 'Auth::logout');
+    $routes->get('dashboard', 'EtudiantController::list', ['filter' => 'role:admin,etudiant']);
+    $routes->get('dashboard/logout', 'Auth::logout');
+
+    $routes->get('etudiants', 'EtudiantController::index', ['filter' => 'role:admin,etudiant']);
+    $routes->get('list', 'EtudiantController::list', ['filter' => 'role:admin,etudiant']);
+    $routes->get('etudiants/(:num)', 'EtudiantController::show/$1', ['filter' => 'role:admin,etudiant']);
+    $routes->get('notes/create', 'EtudiantController::createNoteForm', ['filter' => 'role:admin']);
+    $routes->post('notes/store', 'EtudiantController::storeNotes', ['filter' => 'role:admin']);
+    $routes->get('notes/(:num)/edit', 'EtudiantController::editNoteForm/$1', ['filter' => 'role:admin']);
+    $routes->post('notes/(:num)/update', 'EtudiantController::updateNote/$1', ['filter' => 'role:admin']);
+    $routes->post('notes/(:num)/delete', 'EtudiantController::deleteNote/$1', ['filter' => 'role:admin']);
+    $routes->post('etudiants/(:num)/notes/reset', 'EtudiantController::resetStudentNotes/$1', ['filter' => 'role:admin']);
+});

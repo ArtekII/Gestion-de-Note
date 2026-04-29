@@ -1,15 +1,28 @@
--Login(mode étudiant et prof)(30mi,)
+-Login(mode étudiant et prof)(30 min)
     * Design : 
-        -Création du formulaire (login.html)
+        -Création du formulaire (login.php)
+        -Séparer "user" et "admin"
+        -Admin et user ne doivent pas être dirigés vers la même page
     * Integration : 
-        - Mettre les valeurs par défaut
--Liste étudiants : (45 min)
-    * Design : Liste.html 
-    * Integration : Intégration getAllVenant de la base
-    * Base : 
-        -Création de la table étudiant (nom,id_option,id_semestre,id_matiere,note,credit,resultat)
+        -Mettre les valeurs par défaut sur le formulaire
 
--Page des notes (1h20)
-    * Integration : Lorsqu'on clicke sur un étudiant on vois ces notes avec une option au choix
-    * Design : nememmerdepas.html
-    * base : matieres, options, semestres, liste_matiere
+-Liste étudiants : (45 min)
+    * Design : list.php
+    * Integration : Intégration de getAll venant de la base
+    * Base : 
+        -Création de la table étudiant (nom, id_option, id_semestre, id_matiere, note, credit, resultat)
+
+-Page des notes : notes_etudiant.php (1h20)
+    * Design : utilisation du style.css deja present
+    * Integration : Lorsqu'on clique sur un étudiant, on voit ses notes avec un choix d'option
+    * Base : matieres, options, semestres, liste_matiere
+
+-Page Formulaire note (2h)
+    * Design : style.css, même design utilisé
+    * Integration : Saisie des notes et calcul automatique des notes saisies
+    * Base : table etudiant
+
+-Page Dashboard(30 minutes)
+    * Design : dashboard.php
+    * Integration : Menu de la liste des étudiants
+    * Base : aucune

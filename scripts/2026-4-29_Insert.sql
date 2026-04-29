@@ -41,7 +41,15 @@ INSERT INTO matiere (id_semestre, id_option, code_matiere, coefficient) VALUES
 (2, 1, 'MTH203', 4),
 (2, 1, 'MTH206', 4);
 
--- 5. Remplissage de la table ETUDIANT
+-- 5. Groupes optionnels (matiere avec meilleure note)
+INSERT INTO groupe_optionnel (nom, id_semestre, id_option) VALUES
+('S4 DEV - MAO / Optimisation', 2, 1);
+
+INSERT INTO groupe_optionnel_matiere (id_groupe_optionnel, code_matiere) VALUES
+(1, 'MTH203'),
+(1, 'MTH206');
+
+-- 6. Remplissage de la table ETUDIANT
 INSERT INTO etudiant (nom, id_option, id_semestre, id_matiere, note, credit, resultat) VALUES
 ('Etudiant 1', NULL, 1, 1, 10.5, 6, 'P'),
 ('Etudiant 1', NULL, 1, 2, 14, 6, 'B'),
