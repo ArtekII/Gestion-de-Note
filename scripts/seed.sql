@@ -6,7 +6,9 @@ INSERT INTO semestre (nom) VALUES
 
 -- OPTIONS
 INSERT INTO options (nom, responsable) VALUES
-('Développement', 'Responsable Dev');
+('Développement', 'Razafijoelina Tahina'),
+('Base de Donnees et Reseaux', 'Rakotomalala Vahatriniana'),
+('Web et Design', 'Rabenanahary Rojo')
 
 
 -- LISTE DES MATIERES
